@@ -11,6 +11,8 @@ return array(
         'ZfSnapPhpDebugBar',
         'AcMailer',
         'Application',
+        'Administration',
+        'MailPartials',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

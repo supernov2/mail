@@ -7,11 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendSkeletonModule\Controller;
+namespace MailPartials\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class SkeletonController extends AbstractActionController
+class PartialsController extends AbstractActionController
 {
     public function indexAction()
     {
