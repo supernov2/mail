@@ -1,7 +1,7 @@
 PNMAIL!!!!!
 =======================
 
-Introduction
+Introdución
 ------------
 Esto es un simple aunque completo sistema de mailing basado en Zend Framework 2.
 
