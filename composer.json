@@ -9,6 +9,8 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.5",
-        "zendframework/zendframework": "~2.5"
+        "zendframework/zendframework": "~2.5",
+        "acelaya/zf2-acmailer": "5.0.*",
+        "snapshotpl/zf-snap-php-debug-bar": "^0.12.1"
     }
 }
