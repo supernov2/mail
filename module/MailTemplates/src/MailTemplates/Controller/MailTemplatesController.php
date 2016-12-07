@@ -25,7 +25,13 @@ class MailTemplatesController extends AbstractActionController
 
     public function detailAction()
     {
-      return [];
+      $id = (int) $this->params()->fromRoute('id',0);
+      if(!$id)
+      {
+        return $this->redirect()->toRoute('admin/mail/templates',['action'=>'index']);
+      }
+
+      return ['template' => $this->mailTemplateService->find('MailTemplates\Model\Template',$id)];
     }
 
     public function fooAction()
