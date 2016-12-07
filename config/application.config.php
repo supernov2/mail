@@ -17,6 +17,7 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'Application',
+        'MailTemplates',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
