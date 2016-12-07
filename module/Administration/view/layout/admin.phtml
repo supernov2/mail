@@ -1,0 +1,89 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <?php echo $this->headTitle('LaCueva Panel ')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <?php echo $this->headTitle('LaCueva Panel')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <meta name="description" content="">
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <?php echo $this->headLink()
+        ->prependStylesheet($this->basePath('panel/css/vendor.css'))
+        ->prependStylesheet($this->basePath('panel/css/app.css')) ?>
+    <?php echo $this->headScript();?>
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="app" id="app">
+        <header class="header">
+            <div class="header-block header-block-collapse hidden-lg-up"><button class="collapse-btn" id="sidebar-collapse-btn">
+                    <i class="fa fa-bars"></i>
+                </button></div>
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+
+                    <li class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="img" style="background-image: url('https://avatars2.githubusercontent.com/u/1630529?v=3&s=40')"> </div> <span class="name">
+    			      Er User
+    			    </span> </a>
+                        <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="/logout"> <i class="fa fa-power-off icon"></i> Logout </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <asie class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">
+                        <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> LaCueva Admin </div>
+                </div>
+                <nav class="menu">
+                    <?php
+                    echo $this->navigation('navigation')->menu()->setPartial('layout/navigation')->render();
+                    ?>
+                </nav>
+            </div>
+        </asie>
+        <article class="content dashboard-page">
+            <section class="section">
+                <div class="row sameheight-container">
+                    <div class="col col-xs-12 col-sm-12 col-md-6 col-xl-5 stats-col">
+                    </div>
+                </div>
+            </section>
+        </article>
+        <footer class="footer">
+                All rights reserved bitches &copy; <?php echo date('Y') ?> <a href="https://github.com/ukadev/mail">Link al repo</a> </li>
+        </footer>
+        <!-- /.modal -->
+    </div>
+</div>
+<!-- Reference block for JS -->
+<div class="ref" id="ref">
+    <div class="color-primary"></div>
+    <div class="chart">
+        <div class="color-primary"></div>
+        <div class="color-secondary"></div>
+    </div>
+</div>
+<script src="/panel/js/vendor.js"></script>
+<script src="/panel/js/app.js"></script>
+<?php echo $this->inlineScript() ?>
+</body>
+
+</html>
