@@ -3,6 +3,7 @@
 
 @script = <<SCRIPT
 MYSQL_PASSWORD="toor"
+DBNAME = "mail"
 
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 add-apt-repository ppa:ondrej/php
@@ -21,6 +22,9 @@ apt-get update
 apt-get install -y php-mbstring php-zip php-libsodium zip
 phpenmod mcrypt
 a2enmod rewrite
+
+mysql -uroot -p$MYSQL_PASSWORD -e "CREATE DATABASE $DBNAME" >> /vagrant/vm_build.log 2>&1
+mysql -uroot -p$MYSQL_PASSWORD -e "grant all privileges on $DBNAME.* to 'root'@'localhost' identified by '$MYSQL_PASSWORD'" > /vagrant/vm_build.log 2>&1
 
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 chown -R www-data:www-data /var/www
