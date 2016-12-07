@@ -18,6 +18,7 @@ return array(
         'BjyAuthorize',
         'Application',
         'Administration',
+        'MailTemplates',
         'MailPartials',
     ),
 

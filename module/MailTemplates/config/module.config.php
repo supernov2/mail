@@ -22,7 +22,7 @@ return array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/mail',
+                    'route'    => '/admin/mail',
                     'defaults' => [
                       'controller' => 'MailTemplates\Controller\MailTemplates',
                       'action' => 'index',
@@ -88,5 +88,18 @@ return array(
             'MailTemplates' => __DIR__ . '/../view',
         ),
     ),
-    
+//    'doctrine' => array(
+//            'driver' => array(
+//                'application_entities' => array(
+//                    'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+//                    'cache' => 'array',
+//                    'paths' => (__DIR__ . '/../src/MailTemplates/Model')
+//                ),
+//                'orm_default' => array(
+//                    'drivers' => array(
+//                        'MailTemplates\Model' => 'application_entities'
+//                    ),
+//                ),
+//            ),
+//        ),
 );
