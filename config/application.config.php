@@ -10,6 +10,12 @@ return array(
     'modules' => array(
         'ZfSnapPhpDebugBar',
         'AcMailer',
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'ZfcBase',
+        'ZfcUser',
+        'ZfcUserDoctrineORM',
+        'BjyAuthorize',
         'Application',
     ),
 
