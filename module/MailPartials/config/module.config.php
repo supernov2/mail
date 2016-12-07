@@ -10,7 +10,7 @@ return array(
             'partials' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/mail',
+                    'route'    => '/admin/mail/partials',
                     'defaults' => array(
                         '__NAMESPACE__' => 'MailPartials\Controller',
                         'controller'    => 'Partials',
@@ -39,5 +39,10 @@ return array(
         'template_path_stack' => array(
             'MailPartials' => __DIR__ . '/../view',
         ),
+    ),
+    'module_layouts' => array(
+        'MailPartials' => array(
+            'default' => 'layout/admin',
+        )
     ),
 );
