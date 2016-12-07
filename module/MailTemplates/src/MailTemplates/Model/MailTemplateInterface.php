@@ -1,8 +1,8 @@
 <?php
-namespace MailTemplate\Model;
+namespace MailTemplates\Model;
 
 interface MailTemplateInterface
 {
   public function getId():int;
-  public function getTitle():string;
+  public function getNombre():string;
 }

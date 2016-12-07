@@ -1,6 +1,7 @@
 <?php
 $title = 'Templates';
 $this->headTitle($title);
+
 ?>
 <h1><?= $this->escapeHtml($title); ?></h1>
 <p>
@@ -12,9 +13,15 @@ $this->headTitle($title);
         <th>Nombre</th>
         <th>&nbsp;</th>
     </tr>
-    <?php foreach ($this->templates as $template) : // <-- change here! ?>
+    <?php
+
+    ?>
+    <?php foreach ($this->templates as $template) : ?>
+      <?php
+
+      ?>
         <tr>
-            <td><?= $this->escapeHtml($template->getTitle()) ?></td>
+            <td><?= $this->escapeHtml($template->getNombre()) ?></td>
             <td>
                 <a href="<?= $this->url('mail/templates/edit', ['action' => 'edit', 'id' => $template->getId()]) ?>">Edit</a>
                 <a href="<?= $this->url('mail/templates/delete', ['action' => 'delete', 'id' => $template->getId()]) ?>">Delete</a>

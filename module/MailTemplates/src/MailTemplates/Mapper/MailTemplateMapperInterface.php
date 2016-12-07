@@ -7,6 +7,6 @@ interface MailTemplateMapperInterface
 {
   public function find($id);
   public function findAll();
-  public function save(MailTemplateInterface $template);
+  public function edit(MailTemplateInterface $template);
   public function delete(MailTemplateInterface $template);
 }

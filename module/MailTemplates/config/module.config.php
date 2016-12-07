@@ -1,10 +1,20 @@
 <?php
 return array(
+    'service_manager' => [
+        'factories' => [
+          'MailTemplates\Mapper\MailTemplateMapperInterface' =>
+                        'MailTemplates\Factory\SqlMapperFactory',
+          'MailTemplates\Service\MailTemplateServiceInterface' =>
+                        'MailTemplates\Factory\TemplateServiceFactory',
+        ],
+    ],
     'controllers' => array(
-        'invokables' => array(
-            'MailTemplates\Controller\MailTemplates' =>
-                          'MailTemplates\Controller\MailTemplatesController',
-        ),
+        'factories' => [
+          'MailTemplates\Controller\WriteTemplate' =>
+                        'MailTemplates\Factory\WriteControllerFactory',
+          'MailTemplates\Controller\MailTemplates' =>
+                        'MailTemplates\Factory\TemplatesControllerFactory',
+          ],
     ),
     'router' => array(
         'routes' => array(
@@ -36,8 +46,8 @@ return array(
                             'options' => [
                               'route' => '/add',
                               'defaults' => [
-                                'controller' => 'MailTemplates\Controller\MailTemplates',
-                                'action' => 'index',
+                                'controller' => 'MailTemplates\Controller\WriteTemplate',
+                                'action' => 'add',
                                 ],
                               ],
                           ],
@@ -46,8 +56,8 @@ return array(
                             'options' => [
                               'route' => '/edit/:id',
                               'defaults' => [
-                                'controller' => 'MailTemplates\Controller\MailTemplates',
-                                'action' => 'index',
+                                'controller' => 'MailTemplates\Controller\WriteTemplate',
+                                'action' => 'edit',
                                 ],
                                 'constraints' => [
                                     'id' => '[1-9]\d*',

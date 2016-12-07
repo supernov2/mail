@@ -7,9 +7,17 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class MailTemplatesController extends AbstractActionController
 {
+    protected $mailTemplateService;
+
+    public function __construct(TemplateServiceInterface $mailTemplateService)
+    {
+
+      $this->mailTemplateService = $mailTemplateService;
+    }
     public function indexAction()
     {
-        return ['templates' => []];
+
+        return ['templates' => $this->mailTemplateService->findAllTemplates()];
     }
 
     public function detailAction()

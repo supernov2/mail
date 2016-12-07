@@ -4,7 +4,7 @@ namespace MailTemplates\Service;
 use MailTemplates\Mapper\MailTemplateMapperInterface;
 use MailTemplates\Model\MailTemplateInterface;
 
-class TemplateService implements MailTemplateInterface
+class TemplateService implements TemplateServiceInterface
 {
   protected $templateMapper;
 
@@ -15,6 +15,7 @@ class TemplateService implements MailTemplateInterface
 
   public function findAllTemplates()
   {
+    
     return $this->templateMapper->findAll();
   }
 
