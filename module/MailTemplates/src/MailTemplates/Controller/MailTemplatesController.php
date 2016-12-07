@@ -9,7 +9,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 class MailTemplatesController extends AbstractActionController
 {
     protected $mailTemplateService;
-    protected $em;
 
     public function __construct( $mailTemplateService)
     {
