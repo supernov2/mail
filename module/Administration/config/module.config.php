@@ -12,30 +12,30 @@ return array(
                 'route' => 'admin',
                 'action' => 'index'
             ),
-//            array(
-//                'label' => 'Mail system',
-//                'uri' => '/admin/mail',
-//                'pages' => array(
-//                    array(
-//                        'label' => 'Mails',
-//                        'uri' => '/admin/mail',
-//                    ),
-//                    array(
-//                        'label' => 'Templates',
-//                        'uri' => '/admin/mail/templates',
-//                    ),
-//                    array(
-//                        'label' => 'Partial Templates',
-//                        'uri' => '/admin/mail/partials',
-//                    ),
-//                ),
-//            ),
+            array(
+                'label' => 'Mail system',
+                'uri' => '/admin/mail',
+                'pages' => array(
+                    array(
+                        'label' => 'Mails',
+                        'uri' => '/admin/mail',
+                    ),
+                    array(
+                        'label' => 'Templates',
+                        'uri' => '/admin/mail/templates',
+                    ),
+                    array(
+                        'label' => 'Partial Templates',
+                        'uri' => '/admin/mail/partials',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
         'factories' => array(
-            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
-        )
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
     ),
     'router' => array(
         'routes' => array(

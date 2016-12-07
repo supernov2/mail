@@ -1,5 +1,10 @@
+
 <ul class="nav metismenu" id="sidebar-menu">
-    <?php foreach ($this->container as $page){?>
+    <?php foreach ($this->navigation('navigation')->getContainer() as $page){?>
+        <?php
+        dump($page);
+        ?>
+
         <li>
             <a href="<?php echo $page->getHref() ?>"> <i class="fa fa-th-large"></i> <?php echo $page->getLabel() ?> <?php echo $page->hasPages() ? '<i class="fa arrow"></i> ' : '' ?></a>
             <?php if ($page->hasPages()){ ?>
