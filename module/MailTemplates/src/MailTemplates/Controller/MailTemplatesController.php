@@ -3,21 +3,25 @@
 namespace MailTemplates\Controller;
 
 use MailTemplates\Service\TemplateServiceInterface;
+use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class MailTemplatesController extends AbstractActionController
 {
     protected $mailTemplateService;
+    protected $em;
 
-    public function __construct(TemplateServiceInterface $mailTemplateService)
+    public function __construct( $mailTemplateService)
     {
-
       $this->mailTemplateService = $mailTemplateService;
     }
+
     public function indexAction()
     {
 
-        return ['templates' => $this->mailTemplateService->findAllTemplates()];
+        return ['templates' => $this->mailTemplateService->
+                                getRepository('MailTemplates\Model\Template')->findAll()
+              ];
     }
 
     public function detailAction()
