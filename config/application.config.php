@@ -17,7 +17,9 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'Application',
+        'Administration',
         'MailTemplates',
+        'MailPartials',
     ),
 
     'module_listener_options' => array(

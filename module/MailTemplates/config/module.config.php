@@ -88,18 +88,18 @@ return array(
             'MailTemplates' => __DIR__ . '/../view',
         ),
     ),
-    'doctrine' => array(
-            'driver' => array(
-                'application_entities' => array(
-                    'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                    'cache' => 'array',
-                    'paths' => (__DIR__ . '/../src/MailTemplates/Model')
-                ),
-                'orm_default' => array(
-                    'drivers' => array(
-                        'MailTemplates\Model' => 'application_entities'
-                    ),
-                ),
-            ),
-        ),
+//    'doctrine' => array(
+//            'driver' => array(
+//                'application_entities' => array(
+//                    'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+//                    'cache' => 'array',
+//                    'paths' => (__DIR__ . '/../src/MailTemplates/Model')
+//                ),
+//                'orm_default' => array(
+//                    'drivers' => array(
+//                        'MailTemplates\Model' => 'application_entities'
+//                    ),
+//                ),
+//            ),
+//        ),
 );
