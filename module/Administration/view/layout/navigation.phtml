@@ -3,7 +3,17 @@
     <?php foreach ($this->navigation('navigation')->getContainer() as $page){?>
         <li>
             <a href="<?php echo $page->getHref() ?>"> <i class="fa fa-th-large"></i> <?php echo $page->getLabel() ?> <?php echo $page->hasPages() ? '<i class="fa arrow"></i> ' : '' ?></a>
-
+            <?php if ($page->hasPages()){ ?>
+            <ul>
+                <?php foreach ($page->getPages() as $child){ ?>
+                <li>
+                    <a href="<?php echo $child->getHref() ?>">
+                        <?php echo $child->getLabel() ?>
+                    </a>
+                </li>
+                <?php } ?>
+            </ul>
+            <?php } ?>
         </li>
     <?php } ?>
 </ul>
