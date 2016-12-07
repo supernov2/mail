@@ -88,4 +88,5 @@ return array(
             'MailTemplates' => __DIR__ . '/../view',
         ),
     ),
+    
 );
