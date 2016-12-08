@@ -1,0 +1,43 @@
+<?php
+$title = 'Add Mail Partial';
+$this->headTitle($title);
+
+?>
+<div class="title-block">
+    <h3 class="title"> <?php echo $this->escapeHtml($title); ?> </h3>
+</div>
+<form name="item">
+    <div class="card card-block">
+        <div class="form-group row"> <label class="col-sm-2 form-control-label text-xs-right">
+                Name:
+            </label>
+            <div class="col-sm-10"> <input type="text" class="form-control boxed" placeholder=""> </div>
+        </div>
+        <div class="form-group row"> <label class="col-sm-2 form-control-label text-xs-right">
+                Content:
+            </label>
+            <div class="col-sm-10">
+                <div class="editor" style="min-height: 200px">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 col-sm-offset-2"> <button type="submit" class="btn btn-primary">
+                    Submit
+                </button> </div>
+        </div>
+    </div>
+</form>
+
+<?php
+$this->headLink()->appendStylesheet('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css');
+$this->inlineScript()->appendFile('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js');
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $(document).ready(function() {
+        $('.editor').summernote();
+    });
+JS;
+$this->inlineScript()->captureEnd();
+?>
