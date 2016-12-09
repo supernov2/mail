@@ -13,73 +13,31 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'mail' => array(
+            'partials' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/mail',
+                    'route'    => '/admin/mail/partials',
                     'defaults' => [
                       'controller' => 'MailPartials\Controller\MailPartials',
                       'action' => 'index',
                       ],
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'partials' => [
-                      'type'    => 'Literal',
-                      'options' => array(
-                          'route'    => '/partials',
-                          'defaults' => [
-                            'controller' => 'MailPartials\Controller\MailPartials',
-                            'action' => 'index',
-                          ],
-                      ),
-                      'may_terminate' => true,
-                      'child_routes' => [
-                          'add' => [
-                            'type' => 'Literal',
-                            'options' => [
-                              'route' => '/add',
-                              'defaults' => [
-                                'controller' => 'MailPartials\Controller\MailPartials',
-                                'action' => 'add',
-                                ],
-                              ],
-                          ],
-                          'edit' => [
-                            'type' => 'Segment',
-                            'options' => [
-                              'route' => '/edit/:id',
-                              'defaults' => [
-                                'controller' => 'MailPartials\Controller\MailPartials',
-                                'action' => 'edit',
-                                ],
-                                'constraints' => [
-                                    'id' => '[1-9]\d*',
-                                ],
-                              ],
-                          ],
-                          'delete' => [
-                            'type' => 'Segment',
-                            'options' => [
-                              'route' => '/delete/:id',
-                              'defaults' => [
-                                'controller' => 'MailPartials\Controller\MailPartials',
-                                'action' => 'delete',
-                                ],
-                                'constraints' => [
-                                    'id' => '[1-9]\d*',
-                                ],
-                              ],
-                            ],
-                        ],
-                    ],
+            ),
+            'partials_add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/mail/partials/add',
+                    'defaults' => [
+                      'controller' => 'MailPartials\Controller\MailPartials',
+                      'action' => 'index',
+                      ],
                 ),
             ),
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'MailTemplates' => __DIR__ . '/../view',
+            'MailPartials' => __DIR__ . '/../view',
         ),
     ),
     'module_layouts' => array(
