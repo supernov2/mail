@@ -30,12 +30,22 @@ class MailPartialsController extends AbstractActionController
         return [];
     }
 
-    public function storeAction()
+    public function storeAction($partial)
     {
-        return [];
+        return $partial;
     }
 
     public function editAction($id)
+    {
+        return $id;
+    }
+
+    public function updateAction($id)
+    {
+        return $id;
+    }
+
+    public function deleteAction($id)
     {
         return $id;
     }
