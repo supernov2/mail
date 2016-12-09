@@ -6,7 +6,7 @@ $this->headTitle($title);
 <div class="title-block">
     <div class="row">
         <div class="col-md-6">
-            <h3 class="title"> <?php echo $this->escapeHtml($title); ?> <a href="<?php echo $this->url('mail/partials/add');?>" class="btn btn-primary btn-sm rounded-s">
+            <h3 class="title"> <?php echo $this->escapeHtml($title); ?> <a href="<?php echo $this->url('partials/add') ?>" class="btn btn-primary btn-sm rounded-s">
                     Add New Partial
                 </a>
             </h3>
@@ -36,8 +36,8 @@ $this->headTitle($title);
                                         <td><?php echo $partial->getId()?></td>
                                         <td><?php echo $partial->getName()?></td>
                                         <td>
-                                            <a href="<?= $this->url('mail/partials/edit', ['action' => 'edit', 'id' => $partial->getId()]) ?>">Edit</a>
-                                            <a href="<?= $this->url('mail/partials/delete', ['action' => 'delete', 'id' => $partial->getId()]) ?>">Delete</a>
+                                            <a href="<?php echo $this->url('partials/edit', ['id' => $partial->getId()]) ?>">Edit</a>
+                                            <a href="<?php echo $this->url('partials/delete', ['id' => $partial->getId()]) ?>">Delete</a>
                                         </td>
                                     </tr>
                                 <?php
