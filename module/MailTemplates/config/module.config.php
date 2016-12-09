@@ -1,13 +1,6 @@
 <?php
 return array(
-    'service_manager' => [
-        'factories' => [
-          'MailTemplates\Mapper\MailTemplateMapperInterface' =>
-                        'MailTemplates\Factory\SqlMapperFactory',
-          'MailTemplates\Service\MailTemplateServiceInterface' =>
-                        'MailTemplates\Factory\TemplateServiceFactory',
-        ],
-    ],
+
     'controllers' => array(
         'factories' => [
           'MailTemplates\Controller\WriteTemplate' =>
