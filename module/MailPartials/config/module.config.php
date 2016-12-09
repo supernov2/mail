@@ -1,36 +1,65 @@
 <?php
 return array(
-    'service_manager' => [
-        'factories' => [
-          'MailPartials\Mapper\MailPartialMapperInterface' => 'MailPartials\Factory\SqlMapperFactory',
-          'MailPartials\Service\MailPartialServiceInterface' => 'MailPartials\Factory\PartialServiceFactory',
-        ],
-    ],
+    'service_manager' => array(
+        'factories' => array(
+            'MailPartials\Mapper\MailPartialMapperInterface' => 'MailPartials\Factory\SqlMapperFactory',
+            'MailPartials\Service\MailPartialServiceInterface' => 'MailPartials\Factory\PartialServiceFactory',
+        ),
+    ),
     'controllers' => array(
-        'factories' => [
-          'MailPartials\Controller\MailPartials' => 'MailPartials\Factory\PartialsControllerFactory',
-          ],
+        'factories' => array(
+            'MailPartials\Controller\MailPartials' => 'MailPartials\Factory\PartialsControllerFactory',
+        ),
     ),
     'router' => array(
         'routes' => array(
             'partials' => array(
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/mail/partials',
-                    'defaults' => [
-                      'controller' => 'MailPartials\Controller\MailPartials',
-                      'action' => 'index',
-                      ],
+                    'route' => '/admin/mail/partials',
+                    'defaults' => array(
+                        'controller' => 'MailPartials\Controller\MailPartials',
+                        'action' => 'index',
+                    ),
                 ),
-            ),
-            'partials_add' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/admin/mail/partials/add',
-                    'defaults' => [
-                      'controller' => 'MailPartials\Controller\MailPartials',
-                      'action' => 'index',
-                      ],
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'add' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/add',
+                            'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'add',
+                            ),
+                        ),
+                    ),
+                    'edit' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/edit/:id',
+                            'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'edit',
+                            ),
+                            'constraints' => array(
+                                'id' => '[1-9]\d*',
+                            ),
+                        ),
+                    ),
+                    'delete' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/delete/:id',
+                            'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'delete',
+                            ),
+                            'constraints' => array(
+                                'id' => '[1-9]\d*',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
@@ -46,17 +75,17 @@ return array(
         )
     ),
     'doctrine' => array(
-            'driver' => array(
-                'application_entities' => array(
-                    'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                    'cache' => 'array',
-                    'paths' => (__DIR__ . '/../src/MailPartials/Model')
-                ),
-                'orm_default' => array(
-                    'drivers' => array(
-                        'MailPartials\Model' => 'application_entities'
-                    ),
+        'driver' => array(
+            'application_entities' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => (__DIR__ . '/../src/MailPartials/Model')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'MailPartials\Model' => 'application_entities'
                 ),
             ),
         ),
+    ),
 );
