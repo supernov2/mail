@@ -1,33 +1,62 @@
 <?php
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'MailPartials\Mapper\MailPartialMapperInterface' => 'MailPartials\Factory\SqlMapperFactory',
+            'MailPartials\Service\MailPartialServiceInterface' => 'MailPartials\Factory\PartialServiceFactory',
+        ),
+    ),
     'controllers' => array(
-        'invokables' => array(
-            'MailPartials\Controller\Partials' => 'MailPartials\Controller\PartialsController',
+        'factories' => array(
+            'MailPartials\Controller\MailPartials' => 'MailPartials\Factory\PartialsControllerFactory',
         ),
     ),
     'router' => array(
         'routes' => array(
             'partials' => array(
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/mail/partials',
+                    'route' => '/admin/mail/partials',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'MailPartials\Controller',
-                        'controller'    => 'Partials',
-                        'action'        => 'index',
+                        'controller' => 'MailPartials\Controller\MailPartials',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
+                    'add' => array(
+                        'type' => 'Literal',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
+                            'route' => '/add',
                             'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'add',
+                            ),
+                        ),
+                    ),
+                    'edit' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/edit/:id',
+                            'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'edit',
+                            ),
+                            'constraints' => array(
+                                'id' => '[1-9]\d*',
+                            ),
+                        ),
+                    ),
+                    'delete' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/delete/:id',
+                            'defaults' => array(
+                                'controller' => 'MailPartials\Controller\MailPartials',
+                                'action' => 'delete',
+                            ),
+                            'constraints' => array(
+                                'id' => '[1-9]\d*',
                             ),
                         ),
                     ),
@@ -44,5 +73,19 @@ return array(
         'MailPartials' => array(
             'default' => 'layout/admin',
         )
+    ),
+    'doctrine' => array(
+        'driver' => array(
+            'application_entities' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => (__DIR__ . '/../src/MailPartials/Model')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'MailPartials\Model' => 'application_entities'
+                ),
+            ),
+        ),
     ),
 );
