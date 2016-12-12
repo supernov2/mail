@@ -76,14 +76,14 @@ return array(
     ),
     'doctrine' => array(
         'driver' => array(
-            'application_entities' => array(
+            'partials_entities' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
                 'paths' => (__DIR__ . '/../src/MailPartials/Model')
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'MailPartials\Model' => 'application_entities'
+                    'MailPartials\Model' => 'partials_entities'
                 ),
             ),
         ),
