@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="templates_partials")
+ * @ORM\Table(name="partials")
  */
 class Partial implements MailPartialInterface
 {
