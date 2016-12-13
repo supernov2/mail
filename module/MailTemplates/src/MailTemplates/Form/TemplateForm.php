@@ -35,7 +35,7 @@ class TemplateForm extends Form
       'type' => 'DoctrineModule\Form\Element\ObjectSelect',
       'options' => [
         'object_manager'    => $this->entityManager,
-        'target_class'      => 'MailTemplates\Model\Partial',
+        'target_class'      => 'MailPartials\Entity\Partial',
         'property'          => 'name',
 
       ],

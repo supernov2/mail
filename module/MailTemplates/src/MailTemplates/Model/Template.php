@@ -37,7 +37,7 @@ class Template implements MailTemplateInterface, InputFilterAwareInterface
   /**
    * [$partials description]
    * @var \Doctrine\Common\Collections\Collection
-   * @ORM\ManyToMany(targetEntity="partial")
+   * @ORM\ManyToMany(targetEntity="\MailPartials\Entity\partial")
    * @ORM\JoinTable(name="templates_partials",
    *      joinColumns={@ORM\JoinColumn(name="id_t", referencedColumnName="id")},
    *      inverseJoinColumns={@ORM\JoinColumn(name="id_p", referencedColumnName="id")}

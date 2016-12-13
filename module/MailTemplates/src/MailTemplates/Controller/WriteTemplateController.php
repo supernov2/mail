@@ -4,7 +4,8 @@ namespace MailTemplates\Controller;
 use Doctrine\ORM\EntityManager;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
-use MailTemplates\Model\{Template,Partial};
+use MailTemplates\Model\Template;
+use MailPartials\Entity\Partials;
 
 class WriteTemplateController extends AbstractActionController
 {
@@ -37,7 +38,7 @@ class WriteTemplateController extends AbstractActionController
       {
         try {
           $id = $data->toArray()["partial"];
-          $p = $this->mailTemplateService->find('MailTemplates\Model\Partial',$id);
+          $p = $this->mailTemplateService->find('MailPartials\Entity\Partial',$id);
           $data = $this->templateForm->getData();
           $data["partial"] = $p;
           $template->exchangeArray($data);

@@ -19,7 +19,7 @@ return array(
         'Application',
         'Administration',
         'MailTemplates',
-        // 'MailPartials',
+        'MailPartials',
     ),
 
     'module_listener_options' => array(
