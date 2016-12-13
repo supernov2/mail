@@ -7508,26 +7508,26 @@ kbd kbd {
   font-weight: bold;
 }
 
-pre {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 90%;
-  color: #373a3c;
-}
+/*pre {*/
+  /*display: block;*/
+  /*margin-top: 0;*/
+  /*margin-bottom: 1rem;*/
+  /*font-size: 90%;*/
+  /*color: #373a3c;*/
+/*}*/
 
-pre code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  background-color: transparent;
-  border-radius: 0;
-}
+/*pre code {*/
+  /*padding: 0;*/
+  /*font-size: inherit;*/
+  /*color: inherit;*/
+  /*background-color: transparent;*/
+  /*border-radius: 0;*/
+/*}*/
 
-.pre-scrollable {
-  max-height: 340px;
-  overflow-y: scroll;
-}
+/*.pre-scrollable {*/
+  /*max-height: 340px;*/
+  /*overflow-y: scroll;*/
+/*}*/
 
 .container {
   margin-left: auto;
@@ -12190,6 +12190,7 @@ button.close {
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
+  background-color: #ffffff;
 }
 
 .modal-header::after {
@@ -12210,12 +12211,14 @@ button.close {
 .modal-body {
   position: relative;
   padding: 15px;
+  background-color: #ffffff;
 }
 
 .modal-footer {
   padding: 15px;
   text-align: right;
   border-top: 1px solid #e5e5e5;
+  background-color: #ffffff;
 }
 
 .modal-footer::after {
@@ -13471,3 +13474,10 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 /*# sourceMappingURL=bootstrap.css.map */
 .morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
 .morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+
+.tright{
+  text-align: right;
+}
+.modal-header-warning{
+    background-color: #FF4444!important;
+}

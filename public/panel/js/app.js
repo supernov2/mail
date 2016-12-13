@@ -1372,12 +1372,14 @@ $(function () {
 
 });
 $(function() {
-
 	$("body").addClass("loaded");
-
+	$('.nav.metismenu li').each(function(e){
+		if($(this).find('li.active').length !=0){
+			$(this).addClass('active').addClass('open');
+			$(this).children('ul').addClass('collapse').addClass('in');
+		}
+	});
 });
-
-
 /***********************************************
 *        NProgress Settings
 ***********************************************/
