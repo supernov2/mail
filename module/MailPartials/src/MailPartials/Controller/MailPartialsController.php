@@ -84,9 +84,7 @@ class MailPartialsController extends AbstractActionController
                 try {
                     $partial = $objectManager->find('\MailPartials\Entity\Partial', $id);
                 } catch (\Exception $ex) {
-                    return $this->redirect()->toRoute('partials', array(
-                        'action' => 'index'
-                    ));
+                    return $this->redirect()->toRoute('partials');
                 }
                 try {
                     $partial->exchangeArray($form->getData());
@@ -105,7 +103,7 @@ class MailPartialsController extends AbstractActionController
             } else {
                 $message = 'Error while saving the partial';
                 $this->flashMessenger()->addErrorMessage($message);
-                return array('form' => $form, 'id' => $id);
+                return $this->redirect()->toRoute('partials');
             }
         }
     }
@@ -121,7 +119,6 @@ class MailPartialsController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         $request = $this->getRequest();
-//                $id = $request->getPost('id');
                 if (!$id) {
                     $this->flashMessenger()->addErrorMessage('Partial id doesn\'t set');
                     return $this->redirect()->toRoute('partials');
