@@ -58,6 +58,38 @@ class WriteTemplateController extends AbstractActionController
 
   public function editAction()
   {
-    return [];
+      $id = (int) $this->params()->fromRoute('id',0);
+      if(!$id)
+      {
+        return $this->redirect()->toRoute('mail/templates');
+      }
+
+      $template = $this->mailTemplateService->find('MailTemplates\Model\Template',$id);
+      if(!$template) {
+        return $this->redirect()->toRoute('mail/templates');
+      }
+
+      $this->templateForm->bind($template);
+
+      $request = $this->getRequest();
+      if($request->isPost())
+      {
+        $this->templateForm->setData($request->getPost());
+        $this->templateForm->setInputFilter($template->getInputFilter());
+
+        if($this->templateForm->isValid())
+        {
+          $data = $request->getPost();
+          $i = $data->toArray()["partial"];
+          $p = $this->mailTemplateService->find('MailTemplates\Model\Partial',$i);
+          $template->setPartials([$p]);
+          // \Zend\Debug\Debug::dump($template->getPartials());die();
+
+          $this->mailTemplateService->flush();
+          return $this->redirect()->toRoute('mail/templates');
+        }
+      }
+      return ["id"=>$id, "form"=>$this->templateForm];
   }
+
 }

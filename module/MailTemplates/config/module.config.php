@@ -68,7 +68,7 @@ return array(
                               'route' => '/delete/:id',
                               'defaults' => [
                                 'controller' => 'MailTemplates\Controller\MailTemplates',
-                                'action' => 'index',
+                                'action' => 'delete',
                                 ],
                                 'constraints' => [
                                     'id' => '[1-9]\d*',
