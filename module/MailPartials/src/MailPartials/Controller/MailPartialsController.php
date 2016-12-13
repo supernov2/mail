@@ -1,53 +1,142 @@
 <?php
-
 namespace MailPartials\Controller;
 
-use MailPartials\Service\PartialServiceInterface;
-use Doctrine\ORM\EntityManager;
+use MailPartials\Entity\Partial;
+use MailPartials\Form\PartialForm;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
 
 class MailPartialsController extends AbstractActionController
 {
-    protected $mailPartialService;
-
-    public function __construct($mailPartialService)
-    {
-        $this->mailPartialService = $mailPartialService;
-    }
-
     public function indexAction()
     {
-        $partials = $this->mailPartialService->getRepository('MailPartials\Model\Partial')->findAll();
-        $total = count($partials);
-        return [
-            'partials' => $partials,
-            'total' => $total
-        ];
+        $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $partials = $objectManager
+            ->getRepository('\MailPartials\Entity\Partial')
+            ->findBy(array(), array('id' => 'ASC'));
+
+        $partials_array = [];
+        foreach ($partials as $partial) {
+            $partials_array[] = $partial->getArrayCopy();
+        }
+
+        $view = new ViewModel(array(
+            'partials' => $partials_array,
+            'total' => count($partials_array)
+        ));
+
+        return $view;
     }
 
     public function addAction()
     {
-        return [];
+        $form = new PartialForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+                $partial = new Partial();
+                $partial->exchangeArray($form->getData());
+
+                $objectManager->persist($partial);
+                $objectManager->flush();
+                // Redirect to list of partials
+                return $this->redirect()->toRoute('partials');
+            }
+        }
+        return;
     }
 
-    public function storeAction($partial)
+    public function editAction()
     {
-        return $partial;
+        $id = (int)$this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('partials');
+        }
+
+        $form = new PartialForm();
+        $form->get('submit')->setValue('Save');
+
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $partial = $objectManager
+                ->getRepository('\MailPartials\Entity\Partial')
+                ->findOneBy(array('id' => $id));
+            if (!$partial) {
+                $this->flashMessenger()->addErrorMessage(sprintf('Partial with id %s doesn\'t exists', $id));
+                return $this->redirect()->toRoute('partials');
+            }
+            // Fill form data.
+            $form->bind($partial);
+            return array('form' => $form, 'id' => $id, 'partial' => $partial);
+        } else {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+                $data = $form->getData();
+                $id = $data['id'];
+                try {
+                    $partial = $objectManager->find('\MailPartials\Entity\Partial', $id);
+                } catch (\Exception $ex) {
+                    return $this->redirect()->toRoute('partials', array(
+                        'action' => 'index'
+                    ));
+                }
+                try {
+                    $partial->exchangeArray($form->getData());
+
+                    $objectManager->persist($partial);
+                    $objectManager->flush();
+
+                    $message = 'Partial succesfully saved!';
+                    $this->flashMessenger()->addSuccessMessage($message);
+                } Catch (\Exception $ex) {
+                    $message = $ex
+                        ->getMessage();
+                    $this->flashMessenger()->addErrorMessage($message);
+                }
+                return $this->redirect()->toRoute('partials');
+            } else {
+                $message = 'Error while saving the partial';
+                $this->flashMessenger()->addErrorMessage($message);
+                return array('form' => $form, 'id' => $id);
+            }
+        }
     }
 
-    public function editAction($id)
+    public function deleteAction()
     {
-        return $id;
-    }
+        $id = (int)$this->params()->fromRoute('id', 0);
+        if (!$id) {
+            $this->flashMessenger()->addErrorMessage('Partial id doesn\'t set');
+            return $this->redirect()->toRoute('partials');
+        }
 
-    public function updateAction($id)
-    {
-        return $id;
-    }
+        $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
-    public function deleteAction($id)
-    {
-        return $id;
-    }
+        $request = $this->getRequest();
+                $id = (int)$request->get('id');
+                if (!$id) {
+                    $this->flashMessenger()->addErrorMessage('Partial id doesn\'t set');
+                    return $this->redirect()->toRoute('partials');
+                }
+                try {
+                    $partial = $objectManager->find('\MailPartials\Entity\Partial', $id);
+                    $objectManager->remove($partial);
+                    $objectManager->flush();
+                } catch (\Exception $ex) {
+                    $this->flashMessenger()->addErrorMessage('Error while deleting data');
+                    return $this->redirect()->toRoute('partials');
+                }
 
+                $this->flashMessenger()->addMessage(sprintf('Partial %d was succesfully deleted', $id));
+
+        return $this->redirect()->toRoute('partials');
+    }
 }

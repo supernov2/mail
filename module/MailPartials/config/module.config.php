@@ -1,14 +1,13 @@
 <?php
 return array(
-    'service_manager' => array(
-        'factories' => array(
-            'MailPartials\Mapper\MailPartialMapperInterface' => 'MailPartials\Factory\SqlMapperFactory',
-            'MailPartials\Service\MailPartialServiceInterface' => 'MailPartials\Factory\PartialServiceFactory',
+    'controllers' => array(
+        'invokables' => array(
+            'MailPartials\Controller\MailPartials' => 'MailPartials\Controller\MailPartialsController',
         ),
     ),
-    'controllers' => array(
-        'factories' => array(
-            'MailPartials\Controller\MailPartials' => 'MailPartials\Factory\PartialsControllerFactory',
+    'view_helpers' => array(
+        'invokables' => array(
+            'showMessages' => 'MailPartials\View\Helper\ShowMessages',
         ),
     ),
     'router' => array(
@@ -64,28 +63,27 @@ return array(
             ),
         ),
     ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'MailPartials' => __DIR__ . '/../view',
-        ),
-    ),
     'module_layouts' => array(
         'MailPartials' => array(
             'default' => 'layout/admin',
         )
     ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'MailPartials' => __DIR__ . '/../view',
+        )
+    ),
     'doctrine' => array(
         'driver' => array(
-            'partials_entities' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => (__DIR__ . '/../src/MailPartials/Model')
+            'partials_entity' => array(
+                'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => array(__DIR__ . '/../src/MailPartials/Entity')
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'MailPartials\Model' => 'partials_entities'
-                ),
-            ),
-        ),
+                    'MailPartials\Entity' => 'partials_entity',
+                )
+            )
+        )
     ),
 );
