@@ -34,10 +34,21 @@ class MailTemplatesController extends AbstractActionController
       return ['template' => $this->mailTemplateService->find('MailTemplates\Model\Template',$id)];
     }
 
-    public function fooAction()
+    public function deleteAction()
     {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /module-specific-root/skeleton/foo
-        return array();
+      $id = (int) $this->params()->fromRoute('id',0);
+      if(!$id)
+      {
+        return $this->redirect()->toRoute('mail/templates');
+      }
+
+      $template = $this->mailTemplateService->find('MailTemplates\Model\Template',$id);
+      if(!$template) {
+        return $this->redirect()->toRoute('mail/templates');
+      }
+
+      $this->mailTemplateService->remove($template);
+      $this->mailTemplateService->flush();
+      return $this->redirect()->toRoute('mail/templates');
     }
 }

@@ -39,7 +39,7 @@ class Template implements MailTemplateInterface, InputFilterAwareInterface
    * @var \Doctrine\Common\Collections\Collection
    * @ORM\ManyToMany(targetEntity="partial")
    * @ORM\JoinTable(name="templates_partials",
-   *      joinColumns={@ORM\JoinColumn(name="id_t", referencedColumnName="id")},
+   *      joinColumns={@ORM\JoinColumn(name="id_t", referencedColumnName="id",onDelete="CASCADE")},
    *      inverseJoinColumns={@ORM\JoinColumn(name="id_p", referencedColumnName="id")}
    *    )
    */
@@ -91,6 +91,22 @@ class Template implements MailTemplateInterface, InputFilterAwareInterface
         $this->name = $name;
 
         return $this;
+    }
+
+    public function setPartials($partial)
+    {
+      $this->partials = $partial;
+    }
+
+    public function getPartials()
+    {
+      return $this->partials;
+    }
+
+    public function addPartial($partial)
+    {
+      \Zend\Debug\Debug::dump($this->partials);die();
+      $this->partials = array_push($this->partials, $partial) ?? array($partial);
     }
 
     public function getArrayCopy()
