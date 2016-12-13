@@ -29,6 +29,10 @@ class PartialInputFilter extends InputFilter
         $this->add(array(
             'name' => 'content',
             'required' => true,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
         ));
     }
 }

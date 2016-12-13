@@ -121,7 +121,7 @@ class MailPartialsController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         $request = $this->getRequest();
-                $id = (int)$request->get('id');
+//                $id = $request->getPost('id');
                 if (!$id) {
                     $this->flashMessenger()->addErrorMessage('Partial id doesn\'t set');
                     return $this->redirect()->toRoute('partials');
