@@ -4,5 +4,5 @@ namespace MailTemplates\Model;
 interface MailTemplateInterface
 {
   public function getId():int;
-  public function getNombre():string;
+  public function getName():string;
 }
