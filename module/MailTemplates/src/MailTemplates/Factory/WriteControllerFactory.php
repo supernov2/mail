@@ -10,9 +10,12 @@ class WriteControllerFactory implements FactoryInterface
   {
     $realServiceLocator = $serviceLocator->getServiceLocator();
     $templateService = $realServiceLocator->get('doctrine.entitymanager.orm_default');
+    $templateForm = $realServiceLocator->get('FormElementManager')
+                                        ->get('MailTemplates\Form\TemplateForm');
 
     return new WriteTemplateController(
-      $templateService
+      $templateService,
+      $templateForm
     );
   }
 }

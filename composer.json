@@ -16,7 +16,9 @@
         "doctrine/doctrine-module": "0.10.0",
         "zf-commons/zfc-user-doctrine-orm": "1.0.1",
         "bjyoungblood/bjy-authorize": "1.4.0",
-        "acelaya/zf2-acmailer": "5.0.*",
-        "snapshotpl/zf-snap-php-debug-bar": "^0.12.1"
+        "acelaya/zf2-acmailer": "5.0.*"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "^1.1"
     }
 }

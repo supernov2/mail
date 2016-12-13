@@ -9,6 +9,11 @@ return array(
                         'MailTemplates\Factory\TemplatesControllerFactory',
           ],
     ),
+    'form_elements' => [
+      'factories' => [
+          'MailTemplates\Form\TemplateForm' => "MailTemplates\Factory\TemplatesFormFactory"
+        ]
+    ],
     'router' => array(
         'routes' => array(
             'mail' => array(
@@ -81,16 +86,21 @@ return array(
             'MailTemplates' => __DIR__ . '/../view',
         ),
     ),
+    'module_layouts' => array(
+        'MailTemplates' => array(
+            'default' => 'layout/admin',
+        )
+    ),
     'doctrine' => array(
             'driver' => array(
-                'application_entities' => array(
+                'templates_entities' => array(
                     'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                     'cache' => 'array',
                     'paths' => (__DIR__ . '/../src/MailTemplates/Model')
                 ),
                 'orm_default' => array(
                     'drivers' => array(
-                        'MailTemplates\Model' => 'application_entities'
+                        'MailTemplates\Model' => 'templates_entities'
                     ),
                 ),
             ),

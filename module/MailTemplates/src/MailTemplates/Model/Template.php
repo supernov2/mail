@@ -7,13 +7,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
 
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="templates")
  */
-class Template implements MailTemplateInterface
+class Template implements MailTemplateInterface, InputFilterAwareInterface
 {
+  protected $inputFilter;
   /**
    * [$id description]
    * @var int
@@ -27,7 +32,7 @@ class Template implements MailTemplateInterface
    * @var string
    * @ORM\Column(type="string", length=255)
    */
-  protected $nombre;
+  protected $name;
 
   /**
    * [$partials description]
@@ -69,23 +74,78 @@ class Template implements MailTemplateInterface
      *
      * @return mixed
      */
-    public function getNombre() : string
+    public function getName() : string
     {
-        return $this->nombre;
+        return $this->name;
     }
 
     /**
-     * Set the value of Nombre
+     * Set the value of Name
      *
      * @param mixed nombre
      *
      * @return self
      */
-    public function setNombre(string $nombre)
+    public function setName(string $name)
     {
-        $this->nombre = $nombre;
+        $this->name = $name;
 
         return $this;
     }
 
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
+    public function exchangeArray($data = array())
+    {
+      $this->id = $data["id"];
+      $this->name = $data["name"];
+      $this->partials = [$data["partial"]];
+
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+      if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+
+            $inputFilter->add(array(
+                'name'     => 'id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name'     => 'name',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            ));
+
+            $this->inputFilter = $inputFilter;
+        }
+
+        return $this->inputFilter;
+    }
 }

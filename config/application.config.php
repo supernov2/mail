@@ -8,7 +8,7 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'ZfSnapPhpDebugBar',
+        'ZendDeveloperTools',
         'AcMailer',
         'DoctrineModule',
         'DoctrineORMModule',
@@ -19,7 +19,7 @@ return array(
         'Application',
         'Administration',
         'MailTemplates',
-        'MailPartials',
+        // 'MailPartials',
     ),
 
     'module_listener_options' => array(
