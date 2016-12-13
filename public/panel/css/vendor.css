@@ -7508,26 +7508,26 @@ kbd kbd {
   font-weight: bold;
 }
 
-pre {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 90%;
-  color: #373a3c;
-}
+/*pre {*/
+  /*display: block;*/
+  /*margin-top: 0;*/
+  /*margin-bottom: 1rem;*/
+  /*font-size: 90%;*/
+  /*color: #373a3c;*/
+/*}*/
 
-pre code {
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-  background-color: transparent;
-  border-radius: 0;
-}
+/*pre code {*/
+  /*padding: 0;*/
+  /*font-size: inherit;*/
+  /*color: inherit;*/
+  /*background-color: transparent;*/
+  /*border-radius: 0;*/
+/*}*/
 
-.pre-scrollable {
-  max-height: 340px;
-  overflow-y: scroll;
-}
+/*.pre-scrollable {*/
+  /*max-height: 340px;*/
+  /*overflow-y: scroll;*/
+/*}*/
 
 .container {
   margin-left: auto;
