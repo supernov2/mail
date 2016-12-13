@@ -13478,3 +13478,6 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .tright{
   text-align: right;
 }
+.modal-header-warning{
+    background-color: #FF4444!important;
+}
